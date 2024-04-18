@@ -559,172 +559,172 @@ vector<instruction> make_x86_code(quad q, int x, int y, int z){
             cout << "Adding " << q.arg1 << " and " << q.arg2 << endl;
            
             if(!isVariable(q.arg1)){
-                ins = instruction("movq", "$" + q.arg1+',', "%rdx");
+                ins = instruction("movq", "$" + q.arg1, "%rdx");
 
             }
             else{
-                ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx");
+                ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx");
             }
             insts.push_back(ins);
             if(!isVariable(q.arg2)){
-                ins = instruction("add", "$" + q.arg2+',', "%rdx");
+                ins = instruction("add", "$" + q.arg2, "%rdx");
             }
             else{
-                ins = instruction("add", to_string(y) + "(%rbp)"+',', "%rdx");
+                ins = instruction("add", to_string(y) + "(%rbp)", "%rdx");
             }
         }
         else if(q.op == "-"){
             if(!isVariable(q.arg1)){
-                ins = instruction("movq", "$" + q.arg1+',', "%rdx");
+                ins = instruction("movq", "$" + q.arg1, "%rdx");
             }
             else{
-                ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx");
+                ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx");
             }
             insts.push_back(ins);
             if(!isVariable(q.arg2)){
-                ins = instruction("sub", "$" + q.arg2+',', "%rdx");
+                ins = instruction("sub", "$" + q.arg2, "%rdx");
             }
             else{
-                ins = instruction("sub", to_string(y) + "(%rbp)"+',', "%rdx");
+                ins = instruction("sub", to_string(y) + "(%rbp)", "%rdx");
             }
         }
         else if(q.op == "*"){
             if(!isVariable(q.arg1)){
-                ins = instruction("movq", "$" + q.arg1+',', "%rdx");
+                ins = instruction("movq", "$" + q.arg1, "%rdx");
             }
             else{
-                ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx");
+                ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx");
             }
             insts.push_back(ins);
             if(!isVariable(q.arg2)){
-                ins = instruction("imul", "$" + q.arg2+',', "%rdx");
+                ins = instruction("imul", "$" + q.arg2, "%rdx");
             }
             else{
-                ins = instruction("imul", to_string(y) + "(%rbp)"+',', "%rdx");
+                ins = instruction("imul", to_string(y) + "(%rbp)", "%rdx");
             }
         }
         else if(q.op == "/"){
             if(!isVariable(q.arg1)){   // arg1 is a literal
-                ins = instruction("movq", "$" + q.arg1+',', "%rax");
+                ins = instruction("movq", "$" + q.arg1, "%rax");
                 insts.push_back(ins);
             }
             else{
-                ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rax");
+                ins = instruction("movq", to_string(x) + "(%rbp)", "%rax");
                 insts.push_back(ins);                
             }
             ins = instruction("cqto");
             insts.push_back(ins);
 
             if(!isVariable(q.arg2)){  // arg2 is a literal
-                ins = instruction("movq", "$" + q.arg2+',', "%rbx");
+                ins = instruction("movq", "$" + q.arg2, "%rbx");
             }
             else{
-                ins = instruction("movq", to_string(y) + "(%rbp)"+',', "%rbx");
+                ins = instruction("movq", to_string(y) + "(%rbp)", "%rbx");
             }
             insts.push_back(ins);
-            ins = instruction("idiv", "%rbx"+',', "");
+            ins = instruction("idiv", "%rbx", "");
             insts.push_back(ins);
             ins = instruction("movq", "%rax" + ',', "%rdx");
         }
         else if(q.op == "%"){
             if(!isVariable(q.arg1)){   // arg1 is a literal
-                ins = instruction("movq", "$" + q.arg1+',', "%rax");
+                ins = instruction("movq", "$" + q.arg1, "%rax");
                 insts.push_back(ins);
             }
             else{
-                ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rax");
+                ins = instruction("movq", to_string(x) + "(%rbp)", "%rax");
                 insts.push_back(ins);                
             }
             ins = instruction("cqto");
             insts.push_back(ins);
 
             if(!isVariable(q.arg2)){  // arg2 is a literal
-                ins = instruction("movq", "$" + q.arg2+',', "%rbx");
+                ins = instruction("movq", "$" + q.arg2, "%rbx");
             }
             else{
-                ins = instruction("movq", to_string(y) + "(%rbp)"+',', "%rbx");
+                ins = instruction("movq", to_string(y) + "(%rbp)", "%rbx");
             }
             insts.push_back(ins);
             ins = instruction("idiv", "%rbx", "");
         }
         else if(q.op == "<<"){
             if(!isVariable(q.arg1)){
-                ins = instruction("movq", "$" + q.arg1+',', "%rdx");
+                ins = instruction("movq", "$" + q.arg1, "%rdx");
             }
             else{
-                ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx");
+                ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx");
             }
             insts.push_back(ins);
             if(!isVariable(q.arg2)){
-                ins = instruction("movq", "$" + q.arg2+',', "%rcx");
+                ins = instruction("movq", "$" + q.arg2, "%rcx");
             }
             else{
-                ins = instruction("movq", to_string(y) + "(%rbp)"+',', "%rcx");
+                ins = instruction("movq", to_string(y) + "(%rbp)", "%rcx");
             }
             insts.push_back(ins);
-            ins = instruction("sal", "%cl"+',', "%rdx");
+            ins = instruction("sal", "%cl", "%rdx");
         }
         else if(q.op == ">>"){
             if(!isVariable(q.arg1)){
-                ins = instruction("movq", "$" + q.arg1+',', "%rdx");
+                ins = instruction("movq", "$" + q.arg1, "%rdx");
             }
             else{
-                ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx");
+                ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx");
             }
             insts.push_back(ins);
             if(!isVariable(q.arg2)){
-                ins = instruction("movq", "$" + q.arg2+',', "%rcx");
+                ins = instruction("movq", "$" + q.arg2, "%rcx");
             }
             else{
-                ins = instruction("movq", to_string(y) + "(%rbp)"+',', "%rcx");
+                ins = instruction("movq", to_string(y) + "(%rbp)", "%rcx");
             }
             insts.push_back(ins);
-            ins = instruction("sar", "%cl"+',', "%rdx");
+            ins = instruction("sar", "%cl", "%rdx");
         }
         else if(q.op == ">>>"){
             if(!isVariable(q.arg1)){
-                ins = instruction("movq", "$" + q.arg1+',', "%rdx");
+                ins = instruction("movq", "$" + q.arg1, "%rdx");
             }
             else{
-                ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx");
+                ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx");
             }
             insts.push_back(ins);
             if(!isVariable(q.arg2)){
-                ins = instruction("movq", "$" + q.arg2+',', "%rcx");
+                ins = instruction("movq", "$" + q.arg2, "%rcx");
             }
             else{
-                ins = instruction("movq", to_string(y) + "(%rbp)"+',', "%rcx");
+                ins = instruction("movq", to_string(y) + "(%rbp)", "%rcx");
             }
             insts.push_back(ins);
-            ins = instruction("shr", "%cl"+',', "%rdx");
+            ins = instruction("shr", "%cl", "%rdx");
         }
         else if(q.op == ">"){
             if(!isVariable(q.arg1)){
-                ins = instruction("movq", "$" + q.arg1+',', "%rdx");
+                ins = instruction("movq", "$" + q.arg1, "%rdx");
             }
             else{
-                ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx");
+                ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx");
             }
             insts.push_back(ins);
 
             if(!isVariable(q.arg2)){
-                ins = instruction("movq", "$" + q.arg2+',', "%rcx");
+                ins = instruction("movq", "$" + q.arg2, "%rcx");
             }
             else{
-                ins = instruction("movq", to_string(y) + "(%rbp)"+',', "%rcx");
+                ins = instruction("movq", to_string(y) + "(%rbp)", "%rcx");
             }
             insts.push_back(ins);
-            ins = instruction("cmp", "%rd999x"+',', "%rcx");
+            ins = instruction("cmp", "%rd999x", "%rcx");
             insts.push_back(ins);
             ins = instruction("jl", "1f");  // true
             insts.push_back(ins);
-            ins = instruction("movq", "$0"+',', "%rdx");
+            ins = instruction("movq", "$0", "%rdx");
             insts.push_back(ins);
             ins = instruction("jmp", "2f"); // false
             insts.push_back(ins);
             ins = instruction("", "1", "", "", "label");
             insts.push_back(ins);
-            ins = instruction("movq", "$1"+',', "%rdx");
+            ins = instruction("movq", "$1", "%rdx");
             insts.push_back(ins);
             ins = instruction("jmp", "2f");
             insts.push_back(ins);
@@ -732,31 +732,31 @@ vector<instruction> make_x86_code(quad q, int x, int y, int z){
         }
         else if(q.op == "<"){
             if(!isVariable(q.arg1)){
-                ins = instruction("movq", "$" + q.arg1+',', "%rdx");
+                ins = instruction("movq", "$" + q.arg1, "%rdx");
             }
             else{
-                ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx");
+                ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx");
             }
             insts.push_back(ins);
 
             if(!isVariable(q.arg2)){
-                ins = instruction("movq", "$" + q.arg2+',', "%rcx");
+                ins = instruction("movq", "$" + q.arg2, "%rcx");
             }
             else{
-                ins = instruction("movq", to_string(y) + "(%rbp)"+',', "%rcx");
+                ins = instruction("movq", to_string(y) + "(%rbp)", "%rcx");
             }
             insts.push_back(ins);
-            ins = instruction("cmp", "%rdx"+',', "%rcx");
+            ins = instruction("cmp", "%rdx", "%rcx");
             insts.push_back(ins);
             ins = instruction("jg", "1f");  // true
             insts.push_back(ins);
-            ins = instruction("movq", "$0"+',', "%rdx");
+            ins = instruction("movq", "$0", "%rdx");
             insts.push_back(ins);
             ins = instruction("jmp", "2f"); // false
             insts.push_back(ins);
             ins = instruction("", "1", "", "", "label");
             insts.push_back(ins);
-            ins = instruction("movq", "$1"+',', "%rdx");
+            ins = instruction("movq", "$1", "%rdx");
             insts.push_back(ins);
             ins = instruction("jmp", "2f");
             insts.push_back(ins);
@@ -764,31 +764,31 @@ vector<instruction> make_x86_code(quad q, int x, int y, int z){
         }
         else if(q.op == ">="){
             if(!isVariable(q.arg1)){
-                ins = instruction("movq", "$" + q.arg1+',', "%rdx");
+                ins = instruction("movq", "$" + q.arg1, "%rdx");
             }
             else{
-                ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx");
+                ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx");
             }
             insts.push_back(ins);
 
             if(!isVariable(q.arg2)){
-                ins = instruction("movq", "$" + q.arg2+',', "%rcx");
+                ins = instruction("movq", "$" + q.arg2, "%rcx");
             }
             else{
-                ins = instruction("movq", to_string(y) + "(%rbp)"+',', "%rcx");
+                ins = instruction("movq", to_string(y) + "(%rbp)", "%rcx");
             }
             insts.push_back(ins);
-            ins = instruction("cmp", "%rdx"+',', "%rcx");
+            ins = instruction("cmp", "%rdx", "%rcx");
             insts.push_back(ins);
             ins = instruction("jle", "1f");  // true
             insts.push_back(ins);
-            ins = instruction("movq", "$0"+',', "%rdx");
+            ins = instruction("movq", "$0", "%rdx");
             insts.push_back(ins);
             ins = instruction("jmp", "2f"); // false
             insts.push_back(ins);
             ins = instruction("", "1", "", "", "label");
             insts.push_back(ins);
-            ins = instruction("movq", "$1"+',', "%rdx");
+            ins = instruction("movq", "$1", "%rdx");
             insts.push_back(ins);
             ins = instruction("jmp", "2f");
             insts.push_back(ins);
@@ -796,31 +796,31 @@ vector<instruction> make_x86_code(quad q, int x, int y, int z){
         }
         else if(q.op == "<="){
             if(!isVariable(q.arg1)){
-                ins = instruction("movq", "$" + q.arg1+',', "%rdx");
+                ins = instruction("movq", "$" + q.arg1, "%rdx");
             }
             else{
-                ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx");
+                ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx");
             }
             insts.push_back(ins);
 
             if(!isVariable(q.arg2)){
-                ins = instruction("movq", "$" + q.arg2+',', "%rcx");
+                ins = instruction("movq", "$" + q.arg2, "%rcx");
             }
             else{
-                ins = instruction("movq", to_string(y) + "(%rbp)"+',', "%rcx");
+                ins = instruction("movq", to_string(y) + "(%rbp)", "%rcx");
             }
             insts.push_back(ins);
-            ins = instruction("cmp", "%rdx"+',', "%rcx");
+            ins = instruction("cmp", "%rdx", "%rcx");
             insts.push_back(ins);
             ins = instruction("jge", "1f");  // true
             insts.push_back(ins);
-            ins = instruction("movq", "$0"+',', "%rdx");
+            ins = instruction("movq", "$0", "%rdx");
             insts.push_back(ins);
             ins = instruction("jmp", "2f"); // false
             insts.push_back(ins);
             ins = instruction("", "1", "", "", "label");
             insts.push_back(ins);
-            ins = instruction("movq", "$1"+',', "%rdx");
+            ins = instruction("movq", "$1", "%rdx");
             insts.push_back(ins);
             ins = instruction("jmp", "2f");
             insts.push_back(ins);
@@ -828,31 +828,31 @@ vector<instruction> make_x86_code(quad q, int x, int y, int z){
         }
         else if(q.op == "=="){
             if(!isVariable(q.arg1)){
-                ins = instruction("movq", "$" + q.arg1+',', "%rdx");
+                ins = instruction("movq", "$" + q.arg1, "%rdx");
             }
             else{
-                ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx");
+                ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx");
             }
             insts.push_back(ins);
 
             if(!isVariable(q.arg2)){
-                ins = instruction("movq", "$" + q.arg2+',', "%rcx");
+                ins = instruction("movq", "$" + q.arg2, "%rcx");
             }
             else{
-                ins = instruction("movq", to_string(y) + "(%rbp)"+',', "%rcx");
+                ins = instruction("movq", to_string(y) + "(%rbp)", "%rcx");
             }
             insts.push_back(ins);
-            ins = instruction("cmp", "%rdx"+',', "%rcx");
+            ins = instruction("cmp", "%rdx", "%rcx");
             insts.push_back(ins);
             ins = instruction("je", "1f");  // true
             insts.push_back(ins);
-            ins = instruction("movq", "$0"+',', "%rdx");
+            ins = instruction("movq", "$0", "%rdx");
             insts.push_back(ins);
             ins = instruction("jmp", "2f"); // false
             insts.push_back(ins);
             ins = instruction("", "1", "", "", "label");
             insts.push_back(ins);
-            ins = instruction("movq", "$1"+',', "%rdx");
+            ins = instruction("movq", "$1", "%rdx");
             insts.push_back(ins);
             ins = instruction("jmp", "2f");
             insts.push_back(ins);
@@ -860,31 +860,31 @@ vector<instruction> make_x86_code(quad q, int x, int y, int z){
         }
         else if(q.op == "!="){
             if(!isVariable(q.arg1)){
-                ins = instruction("movq", "$" + q.arg1+',', "%rdx");
+                ins = instruction("movq", "$" + q.arg1, "%rdx");
             }
             else{
-                ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx");
+                ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx");
             }
             insts.push_back(ins);
 
             if(!isVariable(q.arg2)){
-                ins = instruction("movq", "$" + q.arg2+',', "%rcx");
+                ins = instruction("movq", "$" + q.arg2, "%rcx");
             }
             else{
-                ins = instruction("movq", to_string(y) + "(%rbp)"+',', "%rcx");
+                ins = instruction("movq", to_string(y) + "(%rbp)", "%rcx");
             }
             insts.push_back(ins);
-            ins = instruction("cmp", "%rdx"+',', "%rcx");
+            ins = instruction("cmp", "%rdx", "%rcx");
             insts.push_back(ins);
             ins = instruction("jne", "1f");  // true
             insts.push_back(ins);
-            ins = instruction("movq", "$0"+',', "%rdx");
+            ins = instruction("movq", "$0", "%rdx");
             insts.push_back(ins);
             ins = instruction("jmp", "2f"); // false
             insts.push_back(ins);
             ins = instruction("", "1", "", "", "label");
             insts.push_back(ins);
-            ins = instruction("movq", "$1"+',', "%rdx");
+            ins = instruction("movq", "$1", "%rdx");
             insts.push_back(ins);
             ins = instruction("jmp", "2f");
             insts.push_back(ins);
@@ -892,10 +892,10 @@ vector<instruction> make_x86_code(quad q, int x, int y, int z){
         }
         else if(q.op == "&"){
             if(!isVariable(q.arg1)){
-                ins = instruction("movq", "$" + q.arg1+',', "%rdx");
+                ins = instruction("movq", "$" + q.arg1, "%rdx");
             }
             else{
-                ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx");
+                ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx");
             }
             insts.push_back(ins);
             if(!isVariable(q.arg2)){
@@ -907,149 +907,149 @@ vector<instruction> make_x86_code(quad q, int x, int y, int z){
         }
         else if(q.op == "|"){
             if(!isVariable(q.arg1)){
-                ins = instruction("movq", "$" + q.arg1+',', "%rdx");
+                ins = instruction("movq", "$" + q.arg1, "%rdx");
             }
             else{
-                ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx");
+                ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx");
             }
             insts.push_back(ins);
             if(!isVariable(q.arg2)){
-                ins = instruction("or", "$" + q.arg2+',', "%rdx");
+                ins = instruction("or", "$" + q.arg2, "%rdx");
             }
             else{
-                ins = instruction("or", to_string(y) + "(%rbp)"+',', "%rdx");
+                ins = instruction("or", to_string(y) + "(%rbp)", "%rdx");
             }     
         }
         else if(q.op == "^"){
             if(!isVariable(q.arg1)){
-                ins = instruction("movq", "$" + q.arg1+',', "%rdx");
+                ins = instruction("movq", "$" + q.arg1, "%rdx");
             }
             else{
-                ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx");
+                ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx");
             }
             insts.push_back(ins);
             if(!isVariable(q.arg2)){
-                ins = instruction("xor", "$" + q.arg2+',', "%rdx");
+                ins = instruction("xor", "$" + q.arg2, "%rdx");
             }
             else{
-                ins = instruction("xor", to_string(y) + "(%rbp)+','", "%rdx");
+                ins = instruction("xor", to_string(y) + "(%rbp)", "%rdx");
             }
         }
         else if(q.op == "&&"){
             if(!isVariable(q.arg1)){
-                ins = instruction("movq", "$" + q.arg1+',', "%rdx");
+                ins = instruction("movq", "$" + q.arg1, "%rdx");
             }
             else{
-                ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx");
+                ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx");
             }
             insts.push_back(ins);
-            ins = instruction("cmp", "$0"+',', "%rdx");
+            ins = instruction("cmp", "$0", "%rdx");
             insts.push_back(ins);
             ins = instruction("je", "1f");
             insts.push_back(ins);
             if(!isVariable(q.arg2)){
-                ins = instruction("movq", "$" + q.arg2+',', "%rdx");
+                ins = instruction("movq", "$" + q.arg2, "%rdx");
             }
             else{
-                ins = instruction("movq", to_string(y) + "(%rbp)"+',', "%rdx");
+                ins = instruction("movq", to_string(y) + "(%rbp)", "%rdx");
             }
             insts.push_back(ins);
-            ins = instruction("cmp", "$0"+',', "%rdx");
+            ins = instruction("cmp", "$0", "%rdx");
             insts.push_back(ins);
             ins = instruction("je", "1f");
             insts.push_back(ins);
-            ins = instruction("movq", "$1"+',', "%rdx");
+            ins = instruction("movq", "$1", "%rdx");
             insts.push_back(ins);
             ins = instruction("jmp", "2f");
             insts.push_back(ins);
             ins = instruction("", "1", "", "", "label");
             insts.push_back(ins);
-            ins = instruction("movq", "$0"+',', "%rdx");
+            ins = instruction("movq", "$0", "%rdx");
             insts.push_back(ins);
             ins = instruction("", "2", "", "", "label");
         }
         else if(q.op == "||"){
             if(!isVariable(q.arg1)){
-                ins = instruction("movq", "$" + q.arg1+',', "%rdx");
+                ins = instruction("movq", "$" + q.arg1, "%rdx");
             }
             else{
-                ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx");
+                ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx");
             }
             insts.push_back(ins);
-            ins = instruction("cmp", "$0"+',', "%rdx");
+            ins = instruction("cmp", "$0", "%rdx");
             insts.push_back(ins);
             ins = instruction("jne", "1f");     // true
             insts.push_back(ins);
             if(!isVariable(q.arg2)){
-                ins = instruction("movq", "$" + q.arg2+',', "%rdx");
+                ins = instruction("movq", "$" + q.arg2, "%rdx");
             }
             else{
-                ins = instruction("movq", to_string(y) + "(%rbp)"+',', "%rdx");
+                ins = instruction("movq", to_string(y) + "(%rbp)", "%rdx");
             }
             insts.push_back(ins);
-            ins = instruction("cmp", "$0"+',', "%rdx");
+            ins = instruction("cmp", "$0", "%rdx");
             insts.push_back(ins);
             ins = instruction("jne", "1f");     // true
             insts.push_back(ins);
-            ins = instruction("movq", "$0"+',', "%rdx");
+            ins = instruction("movq", "$0", "%rdx");
             insts.push_back(ins);
             ins = instruction("jmp", "2f");     // false
             insts.push_back(ins);
             ins = instruction("", "1", "", "", "label");
             insts.push_back(ins);
-            ins = instruction("movq", "$1"+',', "%rdx");
+            ins = instruction("movq", "$1", "%rdx");
             insts.push_back(ins);
             ins = instruction("", "2", "", "", "label");
         }
         insts.push_back(ins);
         
-        ins = instruction("movq", "%rdx"+',', to_string(z) + "(%rbp)");
+        ins = instruction("movq", "%rdx", to_string(z) + "(%rbp)");
         insts.push_back(ins);
     }
     else if(q.insType == "unary"){        // b(y) = op a(x)
         if(q.op == "~"){
             if(!isVariable(q.arg1)){
-                ins = instruction("movq", "$" + q.arg1+',', "%rdx");
+                ins = instruction("movq", "$" + q.arg1, "%rdx");
             }
             else{
-                ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx");
+                ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx");
             }
             insts.push_back(ins);
-            ins = instruction("neg", "%rdx"+',', "");
+            ins = instruction("neg", "%rdx", "");
         }
         else if(q.op == "!"){
             if(!isVariable(q.arg1)){
-                ins = instruction("movq", "$" + q.arg1+',', "%rdx");
+                ins = instruction("movq", "$" + q.arg1, "%rdx");
             }
             else{
-                ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx");
+                ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx");
             }
             insts.push_back(ins);
-            ins = instruction("not", "%rdx"+',', "");
+            ins = instruction("not", "%rdx", "");
         }
         else if(q.op == "-"){
-            ins = instruction("xor", "%rdx"+',', "%rdx");
+            ins = instruction("xor", "%rdx", "%rdx");
             insts.push_back(ins);
             if(!isVariable(q.arg1)){
-                ins = instruction("sub", "$" + q.arg1+',', "%rdx");
+                ins = instruction("sub", "$" + q.arg1, "%rdx");
             }
             else{
-                ins = instruction("sub", to_string(x) + "(%rbp)"+',', "%rdx");
+                ins = instruction("sub", to_string(x) + "(%rbp)", "%rdx");
             }
         }
         else if(q.op == "+"){
-            ins = instruction("xor", "%rdx"+',', "%rdx");
+            ins = instruction("xor", "%rdx", "%rdx");
             insts.push_back(ins);
             if(!isVariable(q.arg1)){
-                ins = instruction("add", "$" + q.arg1+',', "%rdx");
+                ins = instruction("add", "$" + q.arg1, "%rdx");
             }
             else{
-                ins = instruction("add", to_string(x) + "(%rbp)"+',', "%rdx");
+                ins = instruction("add", to_string(x) + "(%rbp)", "%rdx");
             }
         }
         insts.push_back(ins);
         
-        ins = instruction("movq", "%rdx"+',', to_string(y) + "(%rbp)");
+        ins = instruction("movq", "%rdx", to_string(y) + "(%rbp)");
         insts.push_back(ins);
     }
     else if(q.insType == "assignment"){   // b(y) = a(x)
@@ -1058,21 +1058,21 @@ vector<instruction> make_x86_code(quad q, int x, int y, int z){
             insts.push_back(ins);
         }
         else{
-            ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx");
+            ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx");
             insts.push_back(ins);            
-            ins = instruction("movq", "%rdx"+',', to_string(y) + "(%rbp)");
+            ins = instruction("movq", "%rdx", to_string(y) + "(%rbp)");
             insts.push_back(ins);
         }
     }
     else if(q.insType == "conditional"){  // if_false/if_true(op) a(x) goto y
         if(!isVariable(q.arg1)){
-            ins = instruction("movq", "$" + q.arg1+',', "%rdx");
+            ins = instruction("movq", "$" + q.arg1, "%rdx");
         }
         else{
-            ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx");
+            ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx");
         }
         insts.push_back(ins);
-        ins = instruction("cmp", "$0"+',', "%rdx");
+        ins = instruction("cmp", "$0", "%rdx");
         insts.push_back(ins);
         
         if(q.op == "ifFalse"){
@@ -1093,18 +1093,18 @@ vector<instruction> make_x86_code(quad q, int x, int y, int z){
     }
     else if(q.insType == "store"){        // *(r(z) + a2) = a1(x)
         if(!isVariable(q.arg1)){
-            ins = instruction("movq", "$" + q.arg1+',', "%rax");
+            ins = instruction("movq", "$" + q.arg1, "%rax");
         }
         else{
-            ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rax");
+            ins = instruction("movq", to_string(x) + "(%rbp)", "%rax");
         }
         insts.push_back(ins);
         
-        ins = instruction("movq", to_string(z) + "(%rbp)"+',', "%rdx");
+        ins = instruction("movq", to_string(z) + "(%rbp)", "%rdx");
         insts.push_back(ins);
 
         if(q.arg2 == "" || !isVariable(q.arg2)) {
-            ins = instruction("movq", "%rax"+',', q.arg2 + "(%rdx)");
+            ins = instruction("movq", "%rax", q.arg2 + "(%rdx)");
             insts.push_back(ins);
         }
         else {
@@ -1113,7 +1113,7 @@ vector<instruction> make_x86_code(quad q, int x, int y, int z){
         }
     }
     else if(q.insType == "load"){         // r(z) = *(a1(x) + a2(y))
-        ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx");
+        ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx");
         insts.push_back(ins);
 
         if(q.arg2 == "" || !isVariable(q.arg2)) {
@@ -1159,7 +1159,7 @@ vector<instruction> make_x86_code(quad q, int x, int y, int z){
 
         // shift stack pointer to make space for locals and temporaries, ignore if no locals/temporaries in function
         if(x > 0) {
-            ins = instruction("sub", "$" + to_string(x)+',', "%rsp");
+            ins = instruction("sub", "$" + to_string(x), "%rsp");
             insts.push_back(ins);
         }
     }
@@ -1316,13 +1316,13 @@ vector<instruction> make_x86_code(quad q, int x, int y, int z){
     }
     else if(q.insType == "cast"){     // r(y) = (op) a(x)
         if(!isVariable(q.arg1)) {  // it is a constant
-            ins = instruction("movq", "$" + q.arg1+',', "%rdx");
+            ins = instruction("movq", "$" + q.arg1, "%rdx");
         } 
         else {
-            ins = instruction("movq", to_string(x) + "(%rbp)"+',', "%rdx"); // load rbp + x
+            ins = instruction("movq", to_string(x) + "(%rbp)", "%rdx"); // load rbp + x
         }
         insts.push_back(ins);    
-        ins = instruction("movq", "%rdx"+',', to_string(y) + "(%rbp)");
+        ins = instruction("movq", "%rdx", to_string(y) + "(%rbp)");
         insts.push_back(ins);    
     }
     else if(q.insType == "label"){    // label Lx
